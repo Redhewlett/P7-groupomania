@@ -8,15 +8,15 @@ export default function NavBar() {
     <div className={styles.nav_contrainer}>
       <img className={styles.img} src={logo} alt='logo groupomania avec typo blanc' />
       <nav className={styles.nav}>
-        <NavLink to='/home' exact='true' className={(navData) => (navData.isActive ? 'active' : 'none')} style={{ textDecoration: 'none' }}>
+        <NavLink to='/home' exact='true' className={(navData) => (navData.isActive ? styles.active : 'none')} style={{ textDecoration: 'none' }}>
           <li>Home</li>
         </NavLink>
 
-        <NavLink to='/articlebuilder' className={(navData) => (navData.isActive ? 'active' : 'none')} style={{ textDecoration: 'none' }}>
+        <NavLink to='/articlebuilder' className={(navData) => (navData.isActive ? styles.active : 'none')} style={{ textDecoration: 'none' }}>
           <li>Écrire un article</li>
         </NavLink>
 
-        <NavLink to='/profile' className={(navData) => (navData.isActive ? 'active' : 'none')} style={{ textDecoration: 'none' }}>
+        <NavLink to='/profile' className={(navData) => (navData.isActive ? styles.active : 'none')} style={{ textDecoration: 'none' }}>
           <li>Profile</li>
         </NavLink>
       </nav>
