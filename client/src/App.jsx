@@ -10,12 +10,13 @@ function App() {
   return (
     <div className='App'>
       <Routes>
-        <Route path='/landingpage' element={<LandingPage />} />
-        <Route path='/home' element={<HomePage />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/articlebuilder' element={<ArticleBuilder />} />
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/signin' element={<Signin />} />
+        <Route path='/' exact={true} element={<HomePage />} />
+        <Route path='/landingpage' exact={true} element={<LandingPage />} />
+        <Route path='/home' exact={true} element={<HomePage />} />
+        <Route path='/profile' exact={true} element={<Profile />} />
+        <Route path='/articlebuilder' exact={true} element={<ArticleBuilder />} />
+        <Route path='/signup' exact={true} element={<Signup />} />
+        <Route path='/signin' exact={true} element={<Signin />} />
       </Routes>
     </div>
   )

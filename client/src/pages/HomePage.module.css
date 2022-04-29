@@ -1,0 +1,43 @@
+.recent,
+.recent_three,
+.view_more {
+  display: flex;
+  justify-content: center;
+}
+
+.recent {
+  margin-top: 5em;
+  padding: 1em;
+}
+
+.recent_three {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.recent_three h1 {
+  margin-bottom: 2em;
+  text-align: center;
+  width: 100%;
+}
+
+.recent_three h3 {
+  width: 400px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: lighter;
+}
+
+.view_more {
+  margin-top: 2em;
+}
+
+.card_hover {
+  transition: all ease-in-out 350ms;
+}
+
+.card_hover:hover {
+  transform: translateY(-10px);
+  cursor: pointer;
+}

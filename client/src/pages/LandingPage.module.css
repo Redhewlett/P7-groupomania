@@ -24,7 +24,23 @@
 }
 
 .title {
-  padding-left: 20em;
+  max-width: 716px;
+  animation-name: slidein;
+  animation-duration: 650ms;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slidein {
+  from {
+    margin: 0em -23em 8em -20em;
+    opacity: 0;
+  }
+
+  to {
+    margin: 0em 0em 8em 20em;
+    opacity: 1;
+  }
 }
 
 .links {

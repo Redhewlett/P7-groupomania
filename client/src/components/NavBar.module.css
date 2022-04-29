@@ -8,9 +8,10 @@
 
 nav {
   display: flex;
+  position: sticky;
 }
 
-nav li {
+nav a {
   list-style: none;
   font-size: 1.6em;
   color: white;
@@ -18,12 +19,17 @@ nav li {
   padding: 10px;
 }
 
-nav li:hover {
-  color: #68667a;
+nav a:hover {
+  color: #870e07;
   cursor: pointer;
 }
 
 .nav_contrainer img {
   width: 15%;
   height: 15%;
+}
+
+.active {
+  color: #870e07;
+  font-weight: bold;
 }

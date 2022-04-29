@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from '../components/Card'
+import { StyledCard } from '../components/Card'
 import Button from '../components/Button'
 import styles from './Signup.module.css'
 import logo from '../assets/logos/icon.svg'
@@ -8,26 +8,26 @@ import illustration from '../assets/illustrations/Notifications_Flatline.png'
 export default function Login() {
   return (
     <div className={styles.container}>
-      <Card color='white'>
-        <label for='name'>Nom</label>
-        <input type='text' name='nom' placeholder='Nom' />
+      <div className={styles.form_position}>
+        <StyledCard color={'#65E2FD'}>
+          <label for='name'>Nom</label>
+          <input type='text' name='nom' placeholder='Nom' />
 
-        <label for='prenom'>Prénom</label>
-        <input type='text' name='prenom' placeholder='Prenom' />
+          <label for='prenom'>Prénom</label>
+          <input type='text' name='prénom' placeholder='Prenom' />
 
-        <label for='email'>Email</label>
-        <input type='text' name='email' placeholder='Email' />
+          <label for='email'>Email</label>
+          <input type='text' name='email' placeholder='Email' />
 
-        <label for='email'>Département groupomania</label>
-        <input type='text' name='Département' placeholder='Département' />
+          <label for='département'>Département groupomania</label>
+          <input type='text' name='département' placeholder='Département' />
 
-        <label for='password'>Password</label>
-        <input type='password' name='password' placeholder='Secure Password' />
+          <label for='password'>Password</label>
+          <input type='password' name='password' placeholder='mot de passe sécurisé' />
 
-        <div>
           <Button>S'inscrire</Button>
-        </div>
-      </Card>
+        </StyledCard>
+      </div>
       <img src={illustration} alt='illustration personnage avec une notification sur son telephone' className={styles.illustration} />
       <img src={logo} alt='groupomania logo' className={styles.logo} />
     </div>
