@@ -2,6 +2,7 @@ import HomePage from './pages/HomePage'
 import Profile from './pages/Profile'
 import LandingPage from './pages/LandingPage'
 import ArticleBuilder from './pages/ArticleBuilder'
+import Article from './pages/Article'
 import Signup from './pages/Signup'
 import Signin from './pages/Signin'
 import { Routes, Route } from 'react-router-dom'
@@ -15,6 +16,7 @@ function App() {
         <Route path='/home' exact={true} element={<HomePage />} />
         <Route path='/profile' exact={true} element={<Profile />} />
         <Route path='/articlebuilder' exact={true} element={<ArticleBuilder />} />
+        <Route path='/article' exact={true} element={<Article />} />
         <Route path='/signup' exact={true} element={<Signup />} />
         <Route path='/signin' exact={true} element={<Signin />} />
       </Routes>

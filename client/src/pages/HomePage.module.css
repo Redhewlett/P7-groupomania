@@ -41,3 +41,13 @@
   transform: translateY(-10px);
   cursor: pointer;
 }
+
+.link {
+  color: black;
+  text-decoration: none;
+}
+
+/* setting the color for visited links */
+.link:visited h2 {
+  color: #870e07;
+}

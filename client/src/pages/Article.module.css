@@ -1,0 +1,65 @@
+.main_container,
+.article_container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.article_container {
+  margin: 5em;
+}
+
+.article_container h1 {
+  color: #870e07;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.article_text {
+  width: 60em;
+}
+
+.tags {
+  display: flex;
+  gap: 1em;
+  color: white;
+}
+.tags p {
+  border-radius: 20px;
+  padding: 0.3em 0.4em;
+  background-color: #870e07;
+  transition: all ease-in-out 350ms;
+}
+
+.tags p:hover {
+  cursor: pointer;
+  transform: translateY(-0.3em);
+  box-shadow: 0 5px 7px rgba(0, 0, 0, 0.2);
+}
+
+.info {
+  color: #870e07;
+  font-weight: bold;
+}
+
+.related {
+  margin-top: 5em;
+}
+
+.related h3 {
+  width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: lighter;
+}
+
+.icon {
+  transition: all ease-in-out 350ms;
+}
+
+.icon:hover {
+  cursor: pointer;
+  transform: translateY(-0.1em);
+}
