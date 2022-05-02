@@ -18,6 +18,7 @@ export default function HomePage() {
                 <Link to='/article' className={styles.link}>
                   <h2>Article récent 1</h2>
                   <h3> Résumé article récent 1 lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, accusamus!</h3>
+
                   <span>publié par: auteur1</span>
                 </Link>
               </StyledCard>

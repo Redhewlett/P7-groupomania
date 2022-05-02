@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './NavBar.module.css'
 import logo from '../assets/logos/icon-left-font-monochrome-white.svg'
 import { NavLink } from 'react-router-dom'
+import { Avatar } from '@mantine/core'
 
 export default function NavBar() {
   return (
@@ -17,7 +18,9 @@ export default function NavBar() {
         </NavLink>
 
         <NavLink to='/profile' className={(navData) => (navData.isActive ? styles.active : 'none')} style={{ textDecoration: 'none' }}>
-          <li>Profile</li>
+          <li>
+            <Avatar radius='xl' color='pink' />
+          </li>
         </NavLink>
       </nav>
     </div>

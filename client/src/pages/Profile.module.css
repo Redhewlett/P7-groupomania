@@ -1,0 +1,37 @@
+.profil_card_container,
+.inner_card_container,
+.avatar {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}
+
+.profil_card_container {
+  margin-top: 5em;
+}
+
+.inner_card_container {
+  flex-direction: column;
+}
+.inner_card_container strong {
+  color: #4c4a59;
+}
+
+.inner_card_container p:hover {
+  cursor: pointer;
+}
+
+.avatar {
+  display: flex;
+  margin-bottom: 2em;
+  transition: all ease-in-out 350ms;
+}
+
+.avatar:hover {
+  transform: translateY(-0.1em);
+}
+
+hr {
+  width: 300px;
+  border-color: #870e07;
+}
