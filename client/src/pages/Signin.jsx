@@ -10,10 +10,10 @@ export default function Signin() {
     <div className={styles.container}>
       <div className={styles.form_position}>
         <StyledCard color={'#65E2FD'}>
-          <label for='email'>Email</label>
+          <label htmlFor='email'>Email</label>
           <input type='text' name='email' placeholder='Email' />
 
-          <label for='password'>Password</label>
+          <label htmlFor='password'>Password</label>
           <input type='password' name='password' placeholder='votre mot de passe' />
 
           <Button>Connexion</Button>
