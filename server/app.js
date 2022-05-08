@@ -9,7 +9,7 @@ const con = require('./dbConfig')
 const cors = require('cors')
 //==================Routes================
 const userRoutes = require('./routes/user')
-// const socialRoutes = require('./routes/social')
+const socialRoutes = require('./routes/social')
 //==================Routes end================
 
 //intercept any request containing json() content and put it in the request body (same as body parser)
@@ -44,6 +44,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/api/auth', userRoutes)
+app.use('/api/social', socialRoutes)
 
 //export the app so we can use it in our server
 module.exports = app

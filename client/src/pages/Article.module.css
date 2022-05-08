@@ -1,5 +1,6 @@
 .main_container,
-.article_container {
+.article_container,
+.title_line {
   display: flex;
   justify-content: space-around;
 }
@@ -27,7 +28,7 @@
 }
 .tags p {
   border-radius: 20px;
-  padding: 0.3em 0.4em;
+  padding: 0.3em 0.5em;
   background-color: #870e07;
   transition: all ease-in-out 350ms;
 }
@@ -41,25 +42,18 @@
 .info {
   color: #870e07;
   font-weight: bold;
+  text-transform: capitalize;
 }
 
-.related {
-  margin-top: 5em;
+.trash {
+  width: 1em;
+  transition: all ease-in-out 250ms;
 }
 
-.related h3 {
-  width: 300px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-weight: lighter;
-}
-
-.icon {
-  transition: all ease-in-out 350ms;
-}
-
-.icon:hover {
+.trash:hover {
   cursor: pointer;
-  transform: translateY(-0.1em);
+}
+
+.trash:active {
+  transform: translateY(0.2em);
 }

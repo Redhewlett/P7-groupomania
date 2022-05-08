@@ -16,7 +16,7 @@ function App() {
         <Route path='/home' exact={true} element={<HomePage />} />
         <Route path='/profile' exact={true} element={<Profile />} />
         <Route path='/articlebuilder' exact={true} element={<ArticleBuilder />} />
-        <Route path='/article' exact={true} element={<Article />} />
+        <Route path='/article/:id' exact={true} element={<Article />} />
         <Route path='/signup' exact={true} element={<Signup />} />
         <Route path='/signin' exact={true} element={<Signin />} />
       </Routes>
