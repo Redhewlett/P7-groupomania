@@ -6,7 +6,13 @@ const helmet = require('helmet')
 
 //data base connection
 const con = require('./dbConfig')
+//session and cookie setting
 const cors = require('cors')
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
+const sessionSecret = process.env.SESSION_SECRET
+
 //==================Routes================
 const userRoutes = require('./routes/user')
 const socialRoutes = require('./routes/social')
@@ -14,7 +20,27 @@ const socialRoutes = require('./routes/social')
 
 //intercept any request containing json() content and put it in the request body (same as body parser)
 app.use(express.json())
-app.use(cors())
+app.use(
+  cors({
+    origin: ['http://localhost:3000'],
+    methods: ['GET', 'POST'],
+    credentials: true
+  })
+)
+app.use(cookieParser())
+app.use(bodyParser.urlencoded({ extended: true }))
+
+app.use(
+  session({
+    key: 'userId',
+    secret: sessionSecret,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 60 * 60 * 24
+    }
+  })
+)
 
 //==========data base connection============
 //store our values away, in the .env

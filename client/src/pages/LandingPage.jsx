@@ -15,7 +15,7 @@ export default function LandingPage() {
             S'inscrire
           </Link>
           <Link to='/signin' className={styles.link}>
-            se connecter
+            Se connecter
           </Link>
         </div>
       </div>

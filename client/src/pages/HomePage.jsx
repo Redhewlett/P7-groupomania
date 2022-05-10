@@ -43,6 +43,7 @@ export default function HomePage() {
       </div>
       <div className={styles.view_more}>
         <Button>Voir plus d'articles</Button>
+        <Button>Click!</Button>
       </div>
     </div>
   )

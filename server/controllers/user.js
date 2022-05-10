@@ -2,9 +2,9 @@
 
 //import bcrypt to ash the password
 const bcrypt = require('bcrypt')
-//json token for the auth verification
-const jwt = require('jsonwebtoken')
+//database Connection
 const con = require('../dbConfig')
+
 //================Security-End=====================
 
 //================Auth middlewares=================
@@ -43,14 +43,49 @@ VALUES(?,?,?,?,?,?,?,?)`
     }
     createUser()
   })
-
-  //   bcrypt.hash(req.body.password, 15).then((hash) => {
-  //     res.send(hash)
-  //   })
-
-  //the syntax is sensitive to " " around what you look for in the data base
 }
 
 //login user
-exports.login = (req, res, next) => {}
+exports.login = (req, res, next) => {
+  //first find the user
+  const email = req.body.email
+  const password = req.body.password
+  con.query(`SELECT * FROM groupomania_social.user WHERE email = "${email}";`, (err, results) => {
+    if (err) {
+      throw err
+    }
+    const foundUser = results
+    if (foundUser == 0) {
+      return res.send({ message: 'Wrong Email or Password' })
+    }
+
+    bcrypt
+      .compare(password, foundUser[0].password)
+      .then((valid) => {
+        if (!valid) {
+          return res.send({ message: 'Wrong Password' })
+        }
+        req.session.user = results[0].id
+        res.send(req.session.user)
+      })
+      .catch((error) =>
+        res.status(500).json({
+          error
+        })
+      )
+  })
+}
+
+exports.loginSession = (req, res, next) => {
+  if (req.session.user) {
+    return res.send({ loggedIn: true, user: req.session.user })
+  } else {
+    res.send({ loggedIn: false })
+  }
+}
+
+exports.logOut = (req, res, next) => {
+  res.send({ message: 'bye, loggin out...' })
+}
+
 //================End Auth========================

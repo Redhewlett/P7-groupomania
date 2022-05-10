@@ -18,6 +18,12 @@
   animation-fill-mode: forwards;
 }
 
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+}
+
 @keyframes slidein {
   from {
     margin: -8em -23em 8em -20em;
@@ -41,4 +47,8 @@
   position: relative;
   top: 2.5em;
   left: -10em;
+}
+
+.login_error {
+  color: red;
 }
