@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styles from './LandingPage.module.css'
 import logo from '../assets/logos/icon.svg'
-import illustration from '../assets/illustrations/Notifications_Flatline.png'
+import illustration from '../assets/illustrations/Notifications_Flatline.svg'
 
 export default function LandingPage() {
   return (

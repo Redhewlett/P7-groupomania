@@ -20,30 +20,27 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div>
+    <div className={styles.body}>
       <NavBar />
       <div className={styles.recent}>
-        <StyledCard color='#ffac99'>
-          <div className={styles.recent_three}>
-            <h1>Récemment</h1>
+        <div className={styles.recent_three}>
+          <h1>Récemment</h1>
 
-            {articlesList.map((article) => (
-              <div className={styles.card_hover} key={article.id}>
-                <StyledCard color='white'>
-                  <Link to={'/article/' + article.id} className={styles.link}>
-                    <h2>{article.title}</h2>
-                    <h3>{article.article}</h3>
-                    <span>publié par: {article.author}</span>
-                  </Link>
-                </StyledCard>
-              </div>
-            ))}
-          </div>
-        </StyledCard>
+          {articlesList.map((article) => (
+            <div className={styles.card_hover} key={article.id}>
+              <StyledCard color='white'>
+                <Link to={'/article/' + article.id} className={styles.link}>
+                  <h2>{article.title}</h2>
+                  <h3>{article.article}</h3>
+                  <span>publié par: {article.author}</span>
+                </Link>
+              </StyledCard>
+            </div>
+          ))}
+        </div>
       </div>
       <div className={styles.view_more}>
         <Button>Voir plus d'articles</Button>
-        <Button>Click!</Button>
       </div>
     </div>
   )

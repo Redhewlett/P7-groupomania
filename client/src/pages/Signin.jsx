@@ -4,7 +4,7 @@ import { StyledCard } from '../components/Card'
 import Button from '../components/Button'
 import styles from './Signin.module.css'
 import logo from '../assets/logos/icon.svg'
-import illustration from '../assets/illustrations/Notifications_Flatline.png'
+import illustration from '../assets/illustrations/Notifications_Flatline.svg'
 
 export default function Signin() {
   const [values, setValues] = useState({
@@ -13,7 +13,7 @@ export default function Signin() {
   })
 
   const [alertLoginError, setAlertLoginError] = useState('')
-  const [loginStatus, setLoginStatus] = useState('')
+  // const [loginStatus, setLoginStatus] = useState('')
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
@@ -21,7 +21,6 @@ export default function Signin() {
   Axios.defaults.withCredentials = true
   //send data to the api
   const handleSubmit = (e) => {
-    //data is sent only went the respect the patern or/and the built in html verification
     e.preventDefault()
     const url = 'http://localhost:4000/api/auth/login'
     Axios.post(url, values)
@@ -32,18 +31,18 @@ export default function Signin() {
         console.log(error)
       })
   }
-
-  useEffect(() => {
-    Axios.get('http://localhost:4000/api/auth/loginSession')
-      .then((response) => {
-        if (response.data.loggedIn === true) {
-          setLoginStatus(response.data.user)
-        }
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }, [])
+  //check if we are already loggedin ( this should redirect if we are)
+  // useEffect(() => {
+  //   Axios.get('http://localhost:4000/api/auth/loginSession')
+  //     .then((response) => {
+  //       if (response.data.loggedIn === true) {
+  //         setLoginStatus(response.data.user)
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error)
+  //     })
+  // }, [])
 
   return (
     <div className={styles.container}>

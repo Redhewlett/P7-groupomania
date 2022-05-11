@@ -58,15 +58,13 @@ exports.login = (req, res, next) => {
     if (foundUser == 0) {
       return res.send({ message: 'Wrong Email or Password' })
     }
-
+    //compare passwords
     bcrypt
       .compare(password, foundUser[0].password)
       .then((valid) => {
         if (!valid) {
           return res.send({ message: 'Wrong Password' })
         }
-        req.session.user = results[0].id
-        res.send(req.session.user)
       })
       .catch((error) =>
         res.status(500).json({
@@ -84,8 +82,6 @@ exports.loginSession = (req, res, next) => {
   }
 }
 
-exports.logOut = (req, res, next) => {
-  res.send({ message: 'bye, loggin out...' })
-}
+exports.logOut = (req, res, next) => {}
 
 //================End Auth========================

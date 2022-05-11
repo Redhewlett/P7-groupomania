@@ -4,7 +4,7 @@ import { StyledCard } from '../components/Card'
 import Button from '../components/Button'
 import styles from './Signup.module.css'
 import logo from '../assets/logos/icon.svg'
-import illustration from '../assets/illustrations/Notifications_Flatline.png'
+import illustration from '../assets/illustrations/Notifications_Flatline.svg'
 
 export default function Login() {
   //set the values

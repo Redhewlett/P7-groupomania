@@ -3,8 +3,20 @@ import styles from './NavBar.module.css'
 import logo from '../assets/logos/icon-left-font-monochrome-white.svg'
 import { NavLink } from 'react-router-dom'
 import { Avatar } from '@mantine/core'
+import Button from '../components/Button'
+import Axios from 'axios'
 
 export default function NavBar() {
+  const handleLogOut = () => {
+    Axios.get('http://localhost:4000/api/auth/logOut')
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
   return (
     <div className={styles.nav_contrainer}>
       <img className={styles.img} src={logo} alt='logo groupomania avec typo blanc' />
@@ -22,6 +34,9 @@ export default function NavBar() {
             <Avatar radius='xl' color='pink' />
           </li>
         </NavLink>
+        <Button className={styles.logOut} onClick={handleLogOut}>
+          LogOut
+        </Button>
       </nav>
     </div>
   )

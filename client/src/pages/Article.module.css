@@ -57,3 +57,55 @@
 .trash:active {
   transform: translateY(0.2em);
 }
+
+@media screen and (max-width: 480px) {
+  .title_line {
+    width: 100%;
+  }
+  .article_text {
+    width: 60vw;
+    text-align: left;
+  }
+
+  .info {
+    width: 100%;
+    text-align: left;
+  }
+  .tags {
+    flex-wrap: wrap;
+    gap: 0.5em;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .title_line {
+    width: 100%;
+  }
+  .article_text {
+    width: 60vw;
+  }
+
+  .info {
+    width: 100%;
+  }
+  .tags {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1200px) {
+  .title_line {
+    width: 100%;
+  }
+  .article_text {
+    width: 75vw;
+  }
+
+  .info {
+    width: 100%;
+    text-align: left;
+  }
+  .tags {
+    width: 100%;
+  }
+}

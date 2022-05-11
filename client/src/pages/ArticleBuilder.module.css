@@ -1,9 +1,18 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .article_editor_container,
 .inputs {
   display: flex;
   flex-direction: column;
 }
+
 .article_editor_container {
+  width: 90vw;
   gap: 5em;
   margin: 5em;
   border-radius: 20px;
@@ -11,6 +20,10 @@
   background-color: #ffac99;
   align-items: center;
   justify-content: center;
+}
+
+.richTextEditor_root {
+  width: 75vw;
 }
 
 .inputs {
@@ -21,7 +34,7 @@
 }
 
 .inputs input {
-  width: 70%;
+  width: 75vw;
   font-size: 1.2em;
   border-style: none;
   border-radius: 10px;
@@ -36,4 +49,20 @@
 .inputs input:focus {
   outline: double #f53029;
   border-radius: 0px;
+}
+
+@media screen and (max-width: 480px) {
+  .body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .inputs input {
+    width: 80vw;
+  }
+
+  .article_editor_container {
+  }
 }
