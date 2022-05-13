@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import NavBar from '../components/NavBar'
 import { StyledCard } from '../components/Card'
 import styles from './Article.module.css'
 import Axios from 'axios'
 import { useParams } from 'react-router-dom'
+import { useCookies } from 'react-cookie'
+import { UserContext } from '../context/UserContext'
+
 import trash from '../assets/icons/trash-can-regular.svg'
 
 export default function Article() {
   const id = useParams('id').id
   const [article, setArticle] = useState([])
+  const { cookies, setCookie, removeCookie } = useContext(UserContext)
 
   //random id for tags
   const randomKey = () => {
@@ -17,8 +21,13 @@ export default function Article() {
     return randomId
   }
 
+  //for some reason axios is not setting the headers so we do it manually
+  const auth = {
+    headers: { Authorization: 'JWT ' + cookies.token }
+  }
+
   useEffect(() => {
-    Axios.get(`http://localhost:4000/api/social/posts/${id}`)
+    Axios.get(`http://localhost:4000/api/social/posts/${id}`, auth)
       .then((res) => {
         setArticle(res.data)
       })

@@ -1,5 +1,7 @@
-import { React, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useCookies } from 'react-cookie'
 import Axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 import { StyledCard } from '../components/Card'
 import Button from '../components/Button'
 import styles from './Signin.module.css'
@@ -13,7 +15,14 @@ export default function Signin() {
   })
 
   const [alertLoginError, setAlertLoginError] = useState('')
-  // const [loginStatus, setLoginStatus] = useState('')
+
+  const [cookies, setCookie, removeCookie] = useCookies(['cookielist'])
+
+  const navigate = useNavigate()
+
+  const tokenInCookie = () => {}
+  //TODO put this in use effet to use only on refresh
+  tokenInCookie()
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
@@ -25,24 +34,29 @@ export default function Signin() {
     const url = 'http://localhost:4000/api/auth/login'
     Axios.post(url, values)
       .then((res) => {
-        setAlertLoginError(res.data.message)
+        if (res.data.message === 'Wrong username/password combination!') {
+          //err msg then we cn't login
+
+          setAlertLoginError(res.data.message)
+        } else {
+          //if not we are logged in sucessfully so we go to the home page
+          console.log(res)
+          window.location.reload()
+        }
       })
       .catch((error) => {
         console.log(error)
       })
   }
-  //check if we are already loggedin ( this should redirect if we are)
-  // useEffect(() => {
-  //   Axios.get('http://localhost:4000/api/auth/loginSession')
-  //     .then((response) => {
-  //       if (response.data.loggedIn === true) {
-  //         setLoginStatus(response.data.user)
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error)
-  //     })
-  // }, [])
+
+  //check if we are already loggedin (this should redirect if we are)
+  useEffect(() => {
+    const cookieList = cookies.token
+    if (!cookieList) {
+      return console.log('no jwt token found')
+    }
+    navigate('/home')
+  }, [cookies.token, navigate])
 
   return (
     <div className={styles.container}>

@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import { useState } from 'react'
 import Axios from 'axios'
 import { StyledCard } from '../components/Card'
 import Button from '../components/Button'
@@ -47,7 +47,7 @@ export default function Login() {
       type: 'text',
       placeholder: 'Nom',
       label: 'Nom',
-      pattern: '^[A-Za-z]{3,20}$',
+      pattern: '^[A-Za-zÀ-ú]{3,20}$',
       required: true
     },
     {
@@ -56,7 +56,7 @@ export default function Login() {
       type: 'text',
       placeholder: 'Prénom',
       label: 'Prénom',
-      pattern: '^[A-Za-z]{3,20}$',
+      pattern: '^[A-Za-zÀ-ú]{3,20}$',
       required: true
     },
     {
@@ -73,7 +73,7 @@ export default function Login() {
       type: 'text',
       placeholder: 'Département au seins de groupomania',
       label: 'Département',
-      pattern: '^[A-Za-zÀ-ú]{3,20}$',
+      pattern: '^[A-Za-zÀ-ú ]{3,30}$',
       required: true
     },
     {

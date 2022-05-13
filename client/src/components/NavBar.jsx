@@ -1,5 +1,6 @@
-import React from 'react'
 import styles from './NavBar.module.css'
+import { useCookies } from 'react-cookie'
+import { useNavigate } from 'react-router-dom'
 import logo from '../assets/logos/icon-left-font-monochrome-white.svg'
 import { NavLink } from 'react-router-dom'
 import { Avatar } from '@mantine/core'
@@ -7,14 +8,20 @@ import Button from '../components/Button'
 import Axios from 'axios'
 
 export default function NavBar() {
+  const [cookies, setCookie, removeCookie] = useCookies(['cookielist'])
+  const navigate = useNavigate()
+
   const handleLogOut = () => {
-    Axios.get('http://localhost:4000/api/auth/logOut')
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    removeCookie('token')
+    window.location.reload()
+
+    // Axios.get('http://localhost:4000/api/auth/logOut')
+    //   .then((res) => {
+    //     console.log(res)
+    //   })
+    //   .catch((error) => {
+    //     console.log(error)
+    //   })
   }
 
   return (
