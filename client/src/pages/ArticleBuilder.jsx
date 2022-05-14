@@ -1,16 +1,24 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import NavBar from '../components/NavBar'
 import styles from './ArticleBuilder.module.css'
 import RichEditor from '../components/TextEditor'
 import { useCookies } from 'react-cookie'
 import { UserContext } from '../context/UserContext'
+import { useNavigate } from 'react-router-dom'
 
-const MyInput = ({ name, ariaLabel, placeholder, maxLength = 5 }) => {
+export default function ArticleBuilder() {
+  const { cookies } = useContext(UserContext)
+  const navigate = useNavigate()
   const [value, setValue] = useState('')
-  const onChange = (evt) => {
-    setValue(evt.target.value)
-  }
-  const { cookies, setCookie, removeCookie } = useContext(UserContext)
+
+  //check if we are already loggedin
+  useEffect(() => {
+    const cookieList = cookies.token
+    if (!cookieList) {
+      console.log('not logged in')
+      navigate('/signin')
+    }
+  }, [cookies.token, navigate])
 
   const auth = {
     headers: { Authorization: 'JWT ' + cookies.token }
@@ -18,22 +26,12 @@ const MyInput = ({ name, ariaLabel, placeholder, maxLength = 5 }) => {
   //post request here, dont forget to pass the auth constant
 
   return (
-    <div className={styles.inputs}>
-      <input type='text' value={value} onChange={onChange} aria-label={ariaLabel} name={name} placeholder={placeholder} />
-    </div>
-  )
-}
-
-export default function ArticleBuilder() {
-  return (
     <div className={styles.body}>
       <NavBar />
       <div className={styles.article_editor_container}>
-        <MyInput ariaLabel='titre' name='title' placeholder='Titre...' maxLength={100} />
         <div className={styles.richTextEditor_root}>
-          <RichEditor />
+          <RichEditor value={value} onChange={setValue} />
         </div>
-        <MyInput ariaLabel='hashtag' name='hashtag' placeholder='hashtags puis virgule' />
       </div>
     </div>
   )

@@ -6,11 +6,14 @@ import { StyledCard } from '../components/Card'
 import Button from '../components/Button'
 import Axios from 'axios'
 import { useCookies } from 'react-cookie'
+import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 
 export default function HomePage() {
   const { cookies, setCookie, removeCookie } = useContext(UserContext)
   const [articlesList, setArticlesList] = useState([])
+
+  const navigate = useNavigate()
 
   //for some reason axios is not setting the headers so we do it manually
   const auth = {
@@ -23,6 +26,7 @@ export default function HomePage() {
         setArticlesList(res.data)
       })
       .catch((error) => {
+        navigate('/signin')
         console.log(error)
       })
   }, [])

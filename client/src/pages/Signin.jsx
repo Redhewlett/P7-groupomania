@@ -20,10 +20,6 @@ export default function Signin() {
 
   const navigate = useNavigate()
 
-  const tokenInCookie = () => {}
-  //TODO put this in use effet to use only on refresh
-  tokenInCookie()
-
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
   }
@@ -40,7 +36,7 @@ export default function Signin() {
           setAlertLoginError(res.data.message)
         } else {
           //if not we are logged in sucessfully so we go to the home page
-          console.log(res)
+          //console.log(res)
           window.location.reload()
         }
       })
@@ -53,7 +49,7 @@ export default function Signin() {
   useEffect(() => {
     const cookieList = cookies.token
     if (!cookieList) {
-      return console.log('no jwt token found')
+      return console.log('not logged in')
     }
     navigate('/home')
   }, [cookies.token, navigate])

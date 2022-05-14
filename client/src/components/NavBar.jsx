@@ -13,7 +13,8 @@ export default function NavBar() {
 
   const handleLogOut = () => {
     removeCookie('token')
-    window.location.reload()
+    navigate('/signin')
+    //window.location.reload()
 
     // Axios.get('http://localhost:4000/api/auth/logOut')
     //   .then((res) => {
