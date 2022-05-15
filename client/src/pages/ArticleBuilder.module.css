@@ -23,32 +23,7 @@
 }
 
 .richTextEditor_root {
-  width: 75vw;
-}
-
-.inputs {
-  width: 100%;
-  padding: 1em;
-  align-items: center;
-  justify-content: center;
-}
-
-.inputs input {
-  width: 75vw;
-  font-size: 1.2em;
-  border-style: none;
-  border-radius: 10px;
-  padding: 0.7em 0em 0.7em 1em;
-  transition: all ease-in-out 190ms;
-}
-
-.inputs input::placeholder {
-  color: #bdbcc7;
-}
-
-.inputs input:focus {
-  outline: double #f53029;
-  border-radius: 0px;
+  width: 85vw;
 }
 
 @media screen and (max-width: 480px) {
@@ -61,8 +36,5 @@
 
   .inputs input {
     width: 80vw;
-  }
-
-  .article_editor_container {
   }
 }

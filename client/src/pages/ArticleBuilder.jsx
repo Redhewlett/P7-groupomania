@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom'
 export default function ArticleBuilder() {
   const { cookies } = useContext(UserContext)
   const navigate = useNavigate()
-  const [value, setValue] = useState('')
 
   //check if we are already loggedin
   useEffect(() => {
@@ -30,7 +29,7 @@ export default function ArticleBuilder() {
       <NavBar />
       <div className={styles.article_editor_container}>
         <div className={styles.richTextEditor_root}>
-          <RichEditor value={value} onChange={setValue} />
+          <RichEditor />
         </div>
       </div>
     </div>

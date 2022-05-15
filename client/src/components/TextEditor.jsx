@@ -1,28 +1,58 @@
 import { useState } from 'react'
 import { RichTextEditor } from '@mantine/rte'
 import Button from '../components/Button'
+import styles from './TextEditor.module.css'
+//this code structure is very important because it solves the problem
+//of having multiple inputs, and since i use the riche text editor from mantine i can't access name.e.target
+const initialValues = {
+  title: '',
+  hashtags: ''
+}
 
 function RichEditor() {
-  const [article, setArticle] = useState()
-  const [title, setTitle] = useState(' ')
-  const [hashtags, setHashtags] = useState(' ')
-  const handlePost = () => {
-    console.log(title)
-    console.log(article)
-    console.log(hashtags)
+  const [values, setValues] = useState(initialValues)
+  const [article, setArticle] = useState('')
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setValues({
+      ...values,
+      [name]: value
+    })
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const articleObject = { ...values, article }
+    console.log(articleObject)
   }
 
-  //value to access what the user types
   return (
-    <div>
-      <input type='text' onChange={setTitle} aria-label='titre' name='titre' placeholder='titre de l article' />
+    <form onSubmit={handleSubmit}>
+      <input
+        className={styles.inputs}
+        type='text'
+        value={values.title}
+        onChange={handleInputChange}
+        name='title'
+        aria-label='title'
+        placeholder='Titre de l article'
+      />
 
-      <RichTextEditor value={article} onChange={setArticle} />
+      <RichTextEditor value={article} name='article' onChange={setArticle} />
 
-      <input type='text' onChange={setHashtags} aria-label='hashtag' name='hastag' placeholder='hashtags puis virgule' />
-
-      <Button onClick={handlePost}>Poster!</Button>
-    </div>
+      <input
+        className={styles.inputs}
+        type='text'
+        value={values.hashtags}
+        onChange={handleInputChange}
+        name='hashtags'
+        aria-label='hashtags'
+        placeholder='Hashtags puis virgule'
+      />
+      <div className={styles.btn}>
+        <Button>Poster!</Button>
+      </div>
+    </form>
   )
 }
 

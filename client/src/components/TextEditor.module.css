@@ -1,0 +1,23 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.inputs {
+  width: 100%;
+  padding: 1em;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputs:focus {
+  outline: unset;
+  border-radius: 5px;
+}
+
+form .btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
