@@ -17,7 +17,7 @@ export default function ArticleBuilder() {
       console.log('not logged in')
       navigate('/signin')
     }
-  }, [cookies.token, navigate])
+  }, [])
 
   const auth = {
     headers: { Authorization: 'JWT ' + cookies.token }

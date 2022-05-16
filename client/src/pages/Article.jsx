@@ -6,10 +6,11 @@ import Axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 import { UserContext } from '../context/UserContext'
-
 import trash from '../assets/icons/trash-can-regular.svg'
+import { useNavigate } from 'react-router-dom'
 
 export default function Article() {
+  const navigate = useNavigate()
   const id = useParams('id').id
   const [article, setArticle] = useState([])
   const { cookies, setCookie, removeCookie } = useContext(UserContext)
@@ -36,6 +37,17 @@ export default function Article() {
       })
   }, [id])
 
+  const handleDelete = () => {
+    navigate('/home')
+    Axios.delete(`http://localhost:4000/api/social/posts/${id}`, auth)
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
   return (
     <div>
       <NavBar />
@@ -45,11 +57,11 @@ export default function Article() {
             <StyledCard color='#ffac99'>
               <div className={styles.title_line}>
                 <h1>{article.title}</h1>
-                <img className={styles.trash} src={trash} alt='trash icon' />
+                <span className={styles.date}>le:{article.date}</span>
+                <img className={styles.trash} src={trash} alt='trash icon' onClick={handleDelete} />
               </div>
-
               <div className={styles.article_text}>
-                <p>{article.article}</p>
+                <div dangerouslySetInnerHTML={{ __html: article.article }}></div>
               </div>
 
               <span className={styles.info}>

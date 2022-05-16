@@ -35,3 +35,17 @@ hr {
   width: 300px;
   border-color: #870e07;
 }
+
+.modal_content {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.modal_content p {
+  width: 100%;
+  text-align: center;
+}
+.modal_content button {
+  width: 40%;
+}

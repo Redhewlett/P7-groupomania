@@ -6,14 +6,15 @@ import { StyledCard } from '../components/Card'
 import Button from '../components/Button'
 import Axios from 'axios'
 import { useCookies } from 'react-cookie'
-import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 
 export default function HomePage() {
   const { cookies, setCookie, removeCookie } = useContext(UserContext)
   const [articlesList, setArticlesList] = useState([])
-
-  const navigate = useNavigate()
+  //last 3 posted article
+  const [lastArticles, setLastArticles] = useState([])
+  //collapse
+  const [opened, setOpen] = useState(false)
 
   //for some reason axios is not setting the headers so we do it manually
   const auth = {
@@ -24,9 +25,12 @@ export default function HomePage() {
     Axios.get('http://localhost:4000/api/social/posts', auth)
       .then((res) => {
         setArticlesList(res.data)
+        const recentOne = res.data[res.data.length - 1]
+        const recentTwo = res.data[res.data.length - 2]
+        const recentThree = res.data[res.data.length - 3]
+        setLastArticles([recentOne, recentTwo, recentThree])
       })
       .catch((error) => {
-        navigate('/signin')
         console.log(error)
       })
   }, [])
@@ -38,13 +42,15 @@ export default function HomePage() {
         <div className={styles.recent_three}>
           <h1>Récemment</h1>
 
-          {articlesList.map((article) => (
-            <div className={styles.card_hover} key={article.id}>
+          {lastArticles.map((lastArticle) => (
+            <div className={styles.card_hover} key={lastArticle.id}>
               <StyledCard color='white'>
-                <Link to={'/article/' + article.id} className={styles.link}>
-                  <h2>{article.title}</h2>
-                  <h3>{article.article}</h3>
-                  <span>publié par: {article.author}</span>
+                <Link to={'/article/' + lastArticle.id} className={styles.link}>
+                  <h2>{lastArticle.title}</h2>
+                  <h3>
+                    <div className={styles.summary} dangerouslySetInnerHTML={{ __html: lastArticle.decodedArticle }}></div>
+                  </h3>
+                  <span>publié par: {lastArticle.author}</span>
                 </Link>
               </StyledCard>
             </div>

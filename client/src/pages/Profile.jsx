@@ -8,8 +8,12 @@ import { useState, useEffect, useContext } from 'react'
 import { useCookies } from 'react-cookie'
 import { UserContext } from '../context/UserContext'
 import { useNavigate } from 'react-router-dom'
+import { Modal } from '@mantine/core'
 
 export default function Profile() {
+  //modal
+  const [opened, setOpened] = useState(false)
+  //user profile
   const [userProfile, setUserProfile] = useState({})
   const { cookies, setCookie, removeCookie } = useContext(UserContext)
 
@@ -20,6 +24,9 @@ export default function Profile() {
   }
   //get the user info with the token
   useEffect(() => {
+    if (!cookies.token) {
+      return navigate('/signin')
+    }
     Axios.get('http://localhost:4000/api/auth/profile', auth)
       .then((res) => {
         if (res) {
@@ -32,6 +39,18 @@ export default function Profile() {
         console.log(error)
       })
   }, [])
+
+  //deleting the account
+  const handleDelete = () => {
+    removeCookie('token')
+    setOpened(false)
+    navigate('/landingpage')
+    Axios.delete('http://localhost:4000/api/auth/deleteAccount', auth)
+      .then((res) => {})
+      .catch((error) => {
+        console.log(error)
+      })
+  }
 
   return (
     <div>
@@ -57,7 +76,14 @@ export default function Profile() {
               {userProfile ? `${userProfile.email}` : <p>no user?</p>},
             </p>
             <hr />
-            <Button>Delete Account</Button>
+            <Modal opened={opened} size='sm' onClose={() => setOpened(false)}>
+              <div className={styles.modal_content}>
+                <p>Êtes-vous certain(e)? vous perdrez vos données de manière permanente!</p>
+                <Button onClick={handleDelete}>Yes</Button>
+                <Button onClick={() => setOpened(false)}>No</Button>
+              </div>
+            </Modal>
+            <Button onClick={() => setOpened(true)}>Delete Account</Button>
           </div>
         </StyledCard>
       </div>

@@ -5,7 +5,6 @@ import logo from '../assets/logos/icon-left-font-monochrome-white.svg'
 import { NavLink } from 'react-router-dom'
 import { Avatar } from '@mantine/core'
 import Button from '../components/Button'
-import Axios from 'axios'
 
 export default function NavBar() {
   const [cookies, setCookie, removeCookie] = useCookies(['cookielist'])
@@ -14,15 +13,6 @@ export default function NavBar() {
   const handleLogOut = () => {
     removeCookie('token')
     navigate('/signin')
-    //window.location.reload()
-
-    // Axios.get('http://localhost:4000/api/auth/logOut')
-    //   .then((res) => {
-    //     console.log(res)
-    //   })
-    //   .catch((error) => {
-    //     console.log(error)
-    //   })
   }
 
   return (

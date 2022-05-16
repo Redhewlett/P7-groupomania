@@ -1,6 +1,7 @@
 .main_container,
 .article_container,
-.title_line {
+.title_line,
+.date {
   display: flex;
   justify-content: space-around;
 }
@@ -15,6 +16,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.date {
+  width: 9vw;
+  justify-content: center;
+  align-items: center;
 }
 
 .article_text {

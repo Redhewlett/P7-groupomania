@@ -7,8 +7,8 @@ const auth = require('../middleware/auth')
 router.post('/signup', userCtrl.signup)
 //Login user
 router.post('/login', userCtrl.login)
-//Login GET user  info / Logout
+//Login GET user  info / delete account
 router.get('/profile', auth, userCtrl.profile)
-router.get('/logOut', userCtrl.logOut)
+router.delete('/deleteAccount', auth, userCtrl.deleteAccount)
 
 module.exports = router

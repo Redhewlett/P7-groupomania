@@ -12,14 +12,13 @@
 
 .recent {
   background-color: #ffac99;
-  width: 90vw;
+  width: 80vw;
   margin-top: 5em;
   padding: 1em;
   border-radius: 1em;
 }
 
 .recent_three {
-  justify-content: space-between;
   flex-wrap: wrap;
   gap: 2em 2em;
 }
@@ -31,13 +30,15 @@
 }
 
 .recent_three h3 {
-  width: 400px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  width: 55vw;
+  overflow-wrap: break-word;
   font-weight: lighter;
 }
-
+.summary {
+  height: 14vh;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .view_more {
   margin-top: 2em;
 }
@@ -49,6 +50,10 @@
 .card_hover:hover {
   transform: translateY(-10px);
   cursor: pointer;
+}
+.card_hover span,
+.card_hover h2 {
+  text-transform: capitalize;
 }
 
 .link {

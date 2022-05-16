@@ -89,6 +89,7 @@ exports.login = (req, res) => {
 exports.profile = (req, res) => {
   //get the token from the req headers
   const cookieHeader = req.headers.authorization
+
   const token = req.headers.authorization.split('JWT ')[1]
   //extract the user id from it to get his profile from the data base
   const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
@@ -103,11 +104,34 @@ exports.profile = (req, res) => {
       return res.status(404)
     }
     //if he's found lets send his info(except password even if it's hashed)
-    const { nom, prenom, email, departement } = foundUser[0]
-    return res.send({ nom, prenom, email, departement })
+    const { id, nom, prenom, email, departement, role_id } = foundUser[0]
+    return res.send({ id, nom, prenom, email, departement, role_id })
   })
 }
 
-exports.logOut = (req, res) => {}
+exports.deleteAccount = (req, res) => {
+  const token = req.headers.authorization.split('JWT ')[1]
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err) => {
+    if (err) {
+      return res.status(403)
+    }
+    const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+    const { userId } = { ...decodedToken }
+    //check if the user exists
+    con.query(`SELECT * FROM groupomania_social.user WHERE id = "${userId}";`, (err, result) => {
+      if (err) {
+        throw err
+      }
+      //if the user exists we can delete (we can choose to delete his articles or no)
+      const stmt = `DELETE FROM groupomania_social.user WHERE id = ?;`
+      con.query(stmt, userId, (err, results) => {
+        if (err) {
+          throw err
+        }
+        return res.status(204)
+      })
+    })
+  })
+}
 
 //================End Auth========================
