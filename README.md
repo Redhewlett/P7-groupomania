@@ -3,7 +3,7 @@ groupomani's social network
 clone the repo
 install the all dependencies
 
-# Create your .env files with the needed variables:
+# Create your .env file with the needed variables:
 
 DB_HOST = your data base host
 DB_USER = your data base user
