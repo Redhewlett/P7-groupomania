@@ -1,0 +1,12 @@
+.trash {
+  width: 1em;
+  transition: all ease-in-out 250ms;
+}
+
+.trash:hover {
+  cursor: pointer;
+}
+
+.trash:active {
+  transform: translateY(0.2em);
+}

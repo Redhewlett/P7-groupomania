@@ -88,8 +88,6 @@ exports.login = (req, res) => {
 
 exports.profile = (req, res) => {
   //get the token from the req headers
-  const cookieHeader = req.headers.authorization
-
   const token = req.headers.authorization.split('JWT ')[1]
   //extract the user id from it to get his profile from the data base
   const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)

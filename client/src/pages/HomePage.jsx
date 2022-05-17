@@ -7,12 +7,16 @@ import Button from '../components/Button'
 import Axios from 'axios'
 import { useCookies } from 'react-cookie'
 import { UserContext } from '../context/UserContext'
+import { Collapse } from '@mantine/core'
 
 export default function HomePage() {
   const { cookies, setCookie, removeCookie } = useContext(UserContext)
+  //full article list
   const [articlesList, setArticlesList] = useState([])
   //last 3 posted article
   const [lastArticles, setLastArticles] = useState([])
+  //article list without the 3 most recents
+  const [restOfArticles, setRestOfArticles] = useState([])
   //collapse
   const [opened, setOpen] = useState(false)
 
@@ -29,6 +33,7 @@ export default function HomePage() {
         const recentTwo = res.data[res.data.length - 2]
         const recentThree = res.data[res.data.length - 3]
         setLastArticles([recentOne, recentTwo, recentThree])
+        setRestOfArticles(res.data.slice(0, articlesList.length - 3))
       })
       .catch((error) => {
         console.log(error)
@@ -58,8 +63,25 @@ export default function HomePage() {
         </div>
       </div>
       <div className={styles.view_more}>
-        <Button>Voir plus d'articles</Button>
+        <Button onClick={() => setOpen((o) => !o)}>Voir plus d'articles</Button>
       </div>
+      <Collapse in={opened} transitionDuration={1000} transitionTimingFunction='linear'>
+        <div className={styles.other_articles}>
+          {restOfArticles.map((restOfArticle) => (
+            <div className={styles.card_hover} key={restOfArticle.id}>
+              <StyledCard color='white'>
+                <Link to={'/article/' + restOfArticle.id} className={styles.link}>
+                  <h2>{restOfArticle.title}</h2>
+                  <h3>
+                    <div className={styles.summary} dangerouslySetInnerHTML={{ __html: restOfArticle.decodedArticle }}></div>
+                  </h3>
+                  <span>publié par: {restOfArticle.author}</span>
+                </Link>
+              </StyledCard>
+            </div>
+          ))}
+        </div>
+      </Collapse>
     </div>
   )
 }

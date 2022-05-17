@@ -81,6 +81,7 @@ exports.deletePost = (req, res, next) => {
   const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
   const postToDelete = req.params.id
   const stmt = `SELECT * FROM groupomania_social.articles WHERE id = ?;`
+  console.log
   //first check if the post exist
   con.query(stmt, postToDelete, (err, result, fields) => {
     if (err) {
@@ -93,7 +94,7 @@ exports.deletePost = (req, res, next) => {
     //if we find it we compare the user_id
     const foundPost = result[0]
     //if they're identical we can delete the post
-    if (foundPost.user_id === decodedToken.userId) {
+    if ((foundPost.user_id === decodedToken.userId) | (decodedToken.userRole == process.env.ADMIN_CODE)) {
       postDeletion()
     }
   })

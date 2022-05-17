@@ -1,18 +1,19 @@
 import { useState, useEffect, useContext } from 'react'
 import NavBar from '../components/NavBar'
 import { StyledCard } from '../components/Card'
+import DeleteButton from '../components/DeleteButton'
 import styles from './Article.module.css'
 import Axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 import { UserContext } from '../context/UserContext'
-import trash from '../assets/icons/trash-can-regular.svg'
 import { useNavigate } from 'react-router-dom'
 
 export default function Article() {
   const navigate = useNavigate()
   const id = useParams('id').id
   const [article, setArticle] = useState([])
+
   const { cookies, setCookie, removeCookie } = useContext(UserContext)
 
   //random id for tags
@@ -58,7 +59,7 @@ export default function Article() {
               <div className={styles.title_line}>
                 <h1>{article.title}</h1>
                 <span className={styles.date}>le:{article.date}</span>
-                <img className={styles.trash} src={trash} alt='trash icon' onClick={handleDelete} />
+                <DeleteButton onClick={handleDelete} />
               </div>
               <div className={styles.article_text}>
                 <div dangerouslySetInnerHTML={{ __html: article.article }}></div>

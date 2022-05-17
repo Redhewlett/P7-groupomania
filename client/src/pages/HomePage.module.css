@@ -1,7 +1,8 @@
 .body,
 .recent,
 .recent_three,
-.view_more {
+.view_more,
+.other_articles {
   display: flex;
   justify-content: center;
 }
@@ -29,7 +30,8 @@
   width: 100%;
 }
 
-.recent_three h3 {
+.recent_three h3,
+.other_articles h3 {
   width: 55vw;
   overflow-wrap: break-word;
   font-weight: lighter;
@@ -64,6 +66,17 @@
 /* setting the color for visited links */
 .link:visited h2 {
   color: #870e07;
+}
+
+.other_articles {
+  width: 80vw;
+  margin: 2em 0em 2em 0em;
+  padding: 1em 0em 1em 0em;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2em;
+  background-color: #ffac99;
+  border-radius: 1.5em;
 }
 
 @media screen and (max-width: 480px) {
