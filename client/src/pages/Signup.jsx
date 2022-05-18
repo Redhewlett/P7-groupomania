@@ -5,8 +5,10 @@ import Button from '../components/Button'
 import styles from './Signup.module.css'
 import logo from '../assets/logos/icon.svg'
 import illustration from '../assets/illustrations/Notifications_Flatline.svg'
+import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
+  const navigate = useNavigate()
   //set the values
   const [values, setValues] = useState({
     nom: '',
@@ -17,9 +19,9 @@ export default function Login() {
   })
 
   //send data to the api
-  const handleSubmit = (e) => {
+  const handleSubmit = () => {
     //data is sent only went the respect the patern or/and the built in html verification
-    e.preventDefault()
+
     const url = 'http://localhost:4000/api/auth/signup'
     Axios.post(url, values)
       .then((res) => {
