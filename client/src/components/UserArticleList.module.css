@@ -1,0 +1,32 @@
+.article_container,
+.articleList {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.article_container {
+  margin-top: 5em;
+  width: 99vw;
+}
+
+.articleList {
+  width: 70vw;
+  border-radius: 1.5em;
+  background-color: #ffac99;
+  gap: 1em;
+  padding: 2em 0em;
+  margin-bottom: 1em;
+  flex-direction: column;
+}
+
+.link {
+  color: black;
+  text-decoration: none;
+  background-image: '../assets/icons/trash-can-regular.svg';
+}
+
+/* setting the color for visited links */
+.link:visited h2 {
+  color: #870e07;
+}

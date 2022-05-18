@@ -1,0 +1,14 @@
+.main_container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  background-color: #ffac99;
+  margin-top: 5em;
+}
+
+.editor {
+  width: 80vw;
+  background-color: #ffac99;
+  padding: 2em 0em;
+}

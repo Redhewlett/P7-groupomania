@@ -1,4 +1,5 @@
 import NavBar from '../components/NavBar'
+import UserArticleList from '../components/UserArticleList'
 import Button from '../components/Button'
 import { StyledCard } from '../components/Card'
 import { Avatar } from '@mantine/core'
@@ -9,6 +10,7 @@ import { useCookies } from 'react-cookie'
 import { UserContext } from '../context/UserContext'
 import { useNavigate } from 'react-router-dom'
 import { Modal } from '@mantine/core'
+import pen from '../assets/icons/pen-to-square-solid.svg'
 
 export default function Profile() {
   //modal
@@ -52,6 +54,10 @@ export default function Profile() {
       })
   }
 
+  const handleUpdateProfile = () => {
+    navigate('/updateProfile')
+  }
+
   return (
     <div>
       <NavBar />
@@ -84,9 +90,11 @@ export default function Profile() {
               </div>
             </Modal>
             <Button onClick={() => setOpened(true)}>Delete Account</Button>
+            <img className={styles.pen_update} src={pen} alt='pen icon' onClick={handleUpdateProfile} />
           </div>
         </StyledCard>
       </div>
+      <UserArticleList />
     </div>
   )
 }

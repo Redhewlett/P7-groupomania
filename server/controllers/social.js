@@ -56,8 +56,22 @@ exports.getOnePost = (req, res, next) => {
     return res.send([data])
   })
 }
+//get a list of post depending on user id
+exports.getMyArticles = (req, res, next) => {
+  const token = req.headers.authorization.split('JWT ')[1]
+  const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+  const userId = decodedToken.userId
+  const stmt = `SELECT * FROM groupomania_social.articles WHERE user_id = ?;`
+
+  con.query(stmt, userId, (err, results, fields) => {
+    if (err) {
+      return console.error(err.message)
+    }
+    res.send(results)
+  })
+}
 //=================creat new post=================
-exports.createPost = (req, res, next) => {
+exports.createPost = (req, res) => {
   //encoding the richtexteditor's data before sending
   // create a buffer
   const buff = Buffer.from(req.body.article, 'utf-8')
@@ -75,8 +89,45 @@ exports.createPost = (req, res, next) => {
     return res.status(200).json({ message: 'new article created' })
   })
 }
+
+//==================modify a post================
+exports.modifyPost = (req, res) => {
+  const token = req.headers.authorization.split('JWT ')[1]
+  const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+
+  //find the post we want to modify
+  const stmt = `SELECT * FROM groupomania_social.articles WHERE id = ?;`
+  const postToModify = req.params.id
+  con.query(stmt, postToModify, (err, results, fields) => {
+    if (err) {
+      return console.error(err.message)
+    }
+    //if no post was found send not found
+    if (results.length == 0) {
+      return res.status(404).json({ message: '404 - post not found with this id' })
+    }
+    //verify one more time that it's the right user
+    if (results[0].user_id === decodedToken.userId) {
+      //if it's right we can modify the post and respond
+      // create a buffer
+      const buff = Buffer.from(req.body.article, 'utf-8')
+      // decode buffer as Base64
+      const base64 = buff.toString('base64')
+
+      const update = `UPDATE groupomania_social.articles SET title = "${req.body.title}", article = "${base64}", tags = "${req.body.tags}", author = "${req.body.author}", date = "${req.body.date}", user_id = "${req.body.user_id}" WHERE id = "${postToModify}";`
+      con.query(update, (err, results) => {
+        if (err) {
+          throw err
+        }
+        return res.status(204)
+      })
+    } else {
+      return res.statut(401)
+    }
+  })
+}
 //=================delete a post=================
-exports.deletePost = (req, res, next) => {
+exports.deletePost = (req, res) => {
   const token = req.headers.authorization.split('JWT ')[1]
   const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
   const postToDelete = req.params.id

@@ -49,3 +49,17 @@ hr {
 .modal_content button {
   width: 40%;
 }
+
+.pen_update {
+  width: 1.5em;
+  transition: all ease-in-out 250ms;
+  display: inline-flex;
+}
+
+.pen_update:hover {
+  cursor: pointer;
+}
+
+.pen_update:active {
+  transform: translateY(0.2em);
+}

@@ -107,6 +107,36 @@ exports.profile = (req, res) => {
   })
 }
 
+exports.updateProfile = (req, res) => {
+  const token = req.headers.authorization.split('JWT ')[1]
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err) => {
+    if (err) {
+      return res.status(403)
+    }
+    const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+    const { userId } = { ...decodedToken }
+    //one last security check: check if the user in the body is the same in the token
+    if (userId !== req.body.id) {
+      //if not code stops with the return statement
+      return console.log('this is not your profile!!')
+    }
+    // check if the user exists
+    con.query(`SELECT * FROM groupomania_social.user WHERE id = "${userId}";`, (err, result) => {
+      if (err) {
+        throw err
+      }
+      // if the user exists we can update his profile
+      const stmt = `UPDATE groupomania_social.user SET nom = "${req.body.nom}", prenom = "${req.body.prenom}", email = "${req.body.email}", departement = "${req.body.departement}" WHERE id = "${userId}";`
+      con.query(stmt, (err, results) => {
+        if (err) {
+          throw err
+        }
+        return res.status(204)
+      })
+    })
+  })
+}
+
 exports.deleteAccount = (req, res) => {
   const token = req.headers.authorization.split('JWT ')[1]
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err) => {

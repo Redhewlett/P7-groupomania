@@ -1,16 +1,13 @@
 import { useState, useEffect, useContext } from 'react'
 import NavBar from '../components/NavBar'
 import { StyledCard } from '../components/Card'
-import DeleteButton from '../components/DeleteButton'
 import styles from './Article.module.css'
 import Axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 import { UserContext } from '../context/UserContext'
-import { useNavigate } from 'react-router-dom'
 
 export default function Article() {
-  const navigate = useNavigate()
   const id = useParams('id').id
   const [article, setArticle] = useState([])
 
@@ -38,17 +35,6 @@ export default function Article() {
       })
   }, [id])
 
-  const handleDelete = () => {
-    navigate('/home')
-    Axios.delete(`http://localhost:4000/api/social/posts/${id}`, auth)
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }
-
   return (
     <div>
       <NavBar />
@@ -59,7 +45,6 @@ export default function Article() {
               <div className={styles.title_line}>
                 <h1>{article.title}</h1>
                 <span className={styles.date}>le:{article.date}</span>
-                <DeleteButton onClick={handleDelete} />
               </div>
               <div className={styles.article_text}>
                 <div dangerouslySetInnerHTML={{ __html: article.article }}></div>
